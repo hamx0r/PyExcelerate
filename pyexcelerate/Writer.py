@@ -67,11 +67,13 @@ class Writer(object):
             sheetStream = self._worksheet_template.generate({
                 'worksheet': sheet
             })
+            rendered = self._worksheet_template.render({
+                'worksheet': sheet
+            })
             try:
                 with zf.open(
                         "xl/worksheets/sheet%s.xml" % (index), mode="w") as f:
-                    for s in sheetStream:
-                        f.write(s.encode('utf-8'))
+                    f.write(rendered.encode('utf-8'))
             except RuntimeError:
                 tfd, tfn = tempfile.mkstemp()
                 tf = os.fdopen(tfd, 'wb')

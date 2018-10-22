@@ -198,6 +198,8 @@ class Worksheet(object):
             z = '"><f>%s</f></c>' % (cell[1:]) # Remove equals sign.
         elif type == DataTypes.BOOLEAN:
             z = '" t="b"><v>%d</v></c>' % (cell)
+        else:
+            print(f"Unsupported type {type} in cell {cell} at {x} {y}")
 
         if style:
             return "<c r=\"%s\" s=\"%d%s" % (Range.Range.coordinate_to_string(
